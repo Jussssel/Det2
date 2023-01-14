@@ -1,0 +1,52 @@
+public class RecInt
+{
+public static int InterpolationSearch(int[] array, int value)
+{
+    int low = 0;
+    int high = array.Length - 1;
+    return InterpolationSearch(array, value, low, high);
+}
+
+private static int InterpolationSearch(int[] array, int value, int low, int high)
+{
+    int index = -1;
+
+    if (low <= high)
+    {
+        index = (int)(low + (((int)(high - low) / (array[high] - array[low])) * (value - array[low])));
+        if (array[index] == value) 
+        {
+            return index;
+        }
+        else
+        {
+            if (array[index] < value)
+                low = index + 1;
+            else
+                high = index - 1;
+        } 
+
+        return InterpolationSearch(array, value, low, high);
+    }
+
+    return index;
+}
+public static void main(String args[])
+	{
+		RecInt ob = new RecInt();
+
+    int array[] = { 10, 23, 24, 50, 55 };
+
+		// Elementi që po e kërkojmë
+		int value = 10;
+
+		// Thirrja e metodës më lart
+		int result = ob.InterpolationSearch(array, value, low, high);
+
+		if (result == -1)
+			System.out.println("Element not present");
+
+		else
+			System.out.println("Element found at index " + result);
+	}
+}
