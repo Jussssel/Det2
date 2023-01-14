@@ -1,0 +1,64 @@
+// Importimi klasave të nevojshme
+import java.util.*;
+class GFG {
+
+	// Metoda e kërkimit rekursiv binar që e kthen indeksin e x nëse
+  // ai është prezent, në vargun [l..r], apo kthen -1 përndryshe
+	int binarySearch(int arr[], int l, int r, int x)
+	{
+		// Kufizimi i indeksit të djathtë dhe të majtë për t'iu 
+    //shmangur overflow të indeksave
+		if (r >= l && l <= arr.length - 1) {
+    
+			int mid = l + (r - l) / 2;
+
+			// Nëse elementi gjindet në mes
+			if (arr[mid] == x)
+				return mid;
+
+			// Nëse elementi është më i vogël se mid, 
+      // atëherë ai gjindet në nënvargun e majtë
+			if (arr[mid] > x)
+				return binarySearch(arr, l, mid - 1, x);
+
+			// Përndryshe, gjindet në nënvargun e djathtë
+			return binarySearch(arr, mid + 1, r, x);
+		}
+
+		// Nëse elementi i kërkuar nuk gjindet fare në varg
+		return -1;
+	}
+
+	// Metoda kryesore
+	public static void main(String args[])
+	{
+
+		// Krijimi i objektit për klasën e mëparshme
+		GFG ob = new GFG();
+
+		// Hyrja randome për vargun
+		int arr[] = { 2, 3, 4, 10, 40 };
+
+		// Gjatësia e vargut
+		int n = arr.length;
+
+		// Elementi që po e kërkojmë
+		int x = 10;
+
+		// Thirrja e metodës më lart
+		int result = ob.binarySearch(arr, 0, n - 1, x);
+
+		// Elementi prezent
+		if (result == -1)
+
+			// Shfaqja e elementit
+			System.out.println("Element not present");
+
+		// Elementi jo present
+		else
+
+			//Shfaqja e elementit
+			System.out.println("Element found at index "
+							+ result);
+	}
+}
